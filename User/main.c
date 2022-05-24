@@ -1,5 +1,5 @@
 //===========================================================//
-// Projet Micro - INFO1 - ENSSAT - S2 2022							 //
+// Projet Micro - IMR1 - ENSSAT - 2022							 //
 //===========================================================//
 // File                : Programme de départ
 // Hardware Environment: Open1768	
@@ -75,29 +75,27 @@ int main(void)
 		
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     while(1){
-			
+			// boucle qui permet d'afficher le nombre de tapes qu'on fait sur l'écran
 			if (statu_led == 1){
 				if (n == 1){
 					ecran_lcd_not_touch ();
 					n = 0;
 				}
 			}
-			else {
-				// boucle qui permet d'afficher le nombre de tapes qu'on fait sur l'écran
-				if ( n == 0){	
-					
+			else {		
+				if ( n == 0){				
 						if(!(cptTouch%10)) // on enregistre tous les 10 fois la variable cpTouch
 						{
-							mesdatas[0] = cptTouch; // ajout variable qui compte le nrb de tape dans tableau de données
-							i2c_eeprom_write_read(30, &mesdatas[0], &mesdataslu[0], 5);
+							mesdatas[0] = cptTouch; // ajout variable qui compte le nrb de tapes dans tableau de données
+							i2c_eeprom_write_read(30, &mesdatas[0], &mesdataslu[0], 5); // écrit le nombre de tapes dans 
 							sprintf(chaine, "Stocke : %d",mesdataslu[0]);
-							LCD_write_english_string(10,40, chaine, White, 0);
+							LCD_write_english_string(10,40, chaine, White, 0);// affiche la dernière donnée stocké dans la mémoire
 						}
 						
-						ecran_lcd_touch ();
+						ecran_lcd_touch (); 
 						cptTouch ++;
 						sprintf(chaine, "Nombre de tape : %d",cptTouch);
-						LCD_write_english_string(10,10, chaine, White, 0);
+						LCD_write_english_string(10,10, chaine, White, 0); // affichage du nombre de tapes
 				}	
 				n = 1;
 		}
