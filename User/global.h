@@ -2,12 +2,10 @@
 #include <stdint.h>
 
 
-// mettez ici toutes les "extern" correspondant aux déclarations contenues dans globadec.h
-
-extern char chaine[30]; // buffer pour l'affichage sur le LCD
+extern char chaine[30]; // Buffer pour l'affichage sur le LCD
 extern uint16_t touch_x, touch_y ;
 
-extern int count; // compteur logiciel
+extern int count; // Compteur logiciel
 
-extern int statu_led; // status du toucher de l'écran LCD
+extern int statu_led; // status du touchÃ© de l'Ã©cran LCD
 

@@ -2,30 +2,33 @@
 #include "lpc17xx_libcfg_default.h"
 #include "lpc17xx_gpio.h"
 #include "Timer.h"
-#include "global.h" // fichier contenant toutes les déclarations de variables globales
-
+#include "global.h" 
 void initTimer(){
-	//Déclaration structure de lpc17xx_timer.h
+	// Déclaration structure de lpc17xx_timer.h
 	TIM_MATCHCFG_Type configMatch;
 
-	// Configuration de MR0
+	// Configuration de Match Register 0
 	configMatch.MatchChannel = 0; //MR0 
-	configMatch.IntOnMatch = ENABLE; //Interruption au match
-	configMatch.StopOnMatch = DISABLE; //S'arrete au match
-	configMatch.ResetOnMatch = ENABLE; //Réinitialisation au match
-	configMatch.ExtMatchOutputType = TIM_EXTMATCH_HIGH; 
-	configMatch.MatchValue = 50; //Nombre d'incrément à atteindre pour 10ms
+	configMatch.IntOnMatch = ENABLE; //Interruption en cas de match
+	configMatch.StopOnMatch = DISABLE; // Ne s'arrête pas au match
+	configMatch.ResetOnMatch = ENABLE; // Réinitialisation au match
+	configMatch.ExtMatchOutputType = TIM_EXTMATCH_NOTHING; // En cas de match pas de changement 
+	
+	/*
+	On part de la féquence du micro controleur de 25MHz = 40
+	*/
+	configMatch.MatchValue = 20; //Nombre d'incrément à atteindre pour 10ms
 	//Remplissage config timer avec la précision
 	LPC_TIM0 -> PR = 1250; // calcule la fréquenque à chaque fois
 	
-	TIM_ConfigMatch(LPC_TIM0, &configMatch); //Appel de fonction avec le timer 0 et la configuration de MR0
+	TIM_ConfigMatch(LPC_TIM0, &configMatch); // Appel de fonction avec le timer 0 et la configuration de MR0
 	
 	return;
 }
 
 void TIMER0_IRQHandler(void)
 {
-	uint32_t masque = GPIO_ReadValue(0) & (1<<19); // 19ème bit de la GPIO0
+	uint32_t masque = GPIO_ReadValue(0) & (1<<19); // Lecture du 19e bit sur 32 du GPIO a 1
 	
 	//----- LED ------//
 	count = count +1; // Incrémentation du compteur
@@ -58,10 +61,10 @@ void TIMER0_IRQHandler(void)
 	}
 	
 	//----- LCD -----//
-	if (masque == (1<<19)){
+	if (masque == (1<<19)){ // Si le 19e bit est à 1 on met le flag de status de l'écran lcd à 1
 		statu_led = 1; // Pas appuye
 	}
-	else{
+	else{ // Si le 19e bit est à 0 on met le flag de status de l'écran lcd à 0
 		statu_led = 0; // Appuye
 	}
 

@@ -3,27 +3,24 @@
 #include "affichagelcd.h"
 #include "touch\touch_panel.h"
 
-
-#include "global.h" 
+#include "global.h"
 #include <stdio.h>
 #include <stdint.h>
 
-void ecran_lcd_not_touch (){
+void ecran_lcd_not_touch()
+{
 
-		// affichage sur l'Ècran d'un exemple de 4 carrÈs de couleur et d'une chaine de caractËre
-	  sprintf(chaine,"Pas appuye");
-	  LCD_write_english_string (70,165,chaine,White,Blue);
-	  dessiner_rect(70,60,100,100,1,1,Black,Green);
-		dessiner_rect(70,200,100,100,1,1,Black,Red);	 
-		
+	sprintf(chaine, "Pas appuye");							// Affichage d'une chaine de caract√®re
+	LCD_write_english_string(70, 165, chaine, White, Blue); // Affichage sur l'√©cran la chaine de caract√®re
+	dessiner_rect(70, 60, 100, 100, 1, 1, Black, Green);	// Dessine un carr√© vert
+	dessiner_rect(70, 200, 100, 100, 1, 1, Black, Red);		// Dessine un carr√© rouge
 }
 
-void ecran_lcd_touch (){
+void ecran_lcd_touch()
+{
 
-		// affichage sur l'Ècran d'un exemple de 4 carrÈs de couleur et d'une chaine de caractËre
-	  sprintf(chaine,"Appuye         ");
-	  LCD_write_english_string (70,165,chaine,White,Blue);
-	  dessiner_rect(70,60,100,100,1,1,Black,Yellow);
-		dessiner_rect(70,200,100,100,1,1,Black,Blue);
-		
+	sprintf(chaine, "Appuye         ");						// Affichage d'une chaine de caract√®re
+	LCD_write_english_string(70, 165, chaine, White, Blue); // Affichage sur l'√©cran la chaine de caract√®re
+	dessiner_rect(70, 60, 100, 100, 1, 1, Black, Yellow);	// Dessine un carr√© Jaune
+	dessiner_rect(70, 200, 100, 100, 1, 1, Black, Blue);	// Dessine un carr√© Bleu
 }
