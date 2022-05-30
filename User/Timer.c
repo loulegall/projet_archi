@@ -15,7 +15,9 @@ void initTimer(){
 	configMatch.ExtMatchOutputType = TIM_EXTMATCH_NOTHING; // En cas de match pas de changement 
 	
 	/*
-	On part de la féquence du micro controleur de 25MHz = 40
+	Interruption toutes les 10ms avec une precision de 500us
+	25MHz donc PR = 1250
+	Precission = 500us donc 500us*20 = 10ms
 	*/
 	configMatch.MatchValue = 20; //Nombre d'incrément à atteindre pour 10ms
 	//Remplissage config timer avec la précision
